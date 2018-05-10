@@ -50,4 +50,9 @@ public class CategoriaResource {
 		return categoriaRepository.findOne(codigo);
 	}
 	
+	
+	//Status code
+	// 2xx = Sucesso
+	// 4xx = Erro de cliente
+	// 5xx = Erro no serviço/servidor
 }
