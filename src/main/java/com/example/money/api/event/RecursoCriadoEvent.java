@@ -25,12 +25,4 @@ public class RecursoCriadoEvent extends ApplicationEvent {
 		return codigo;
 	}
 
-	public void setResponse(HttpServletResponse response) {
-		this.response = response;
-	}
-
-	public void setCodigo(Long codigo) {
-		this.codigo = codigo;
-	}
-
 }
