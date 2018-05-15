@@ -25,14 +25,16 @@ public class AutorizationServerConfig extends AuthorizationServerConfigurerAdapt
 			.withClient("angular")
 			.secret("@ngul@r0")
 			.scopes("read", "write")
-			.authorizedGrantTypes("password")
-			.accessTokenValiditySeconds(1800);
+			.authorizedGrantTypes("password", "refresh_token")
+			.accessTokenValiditySeconds(20)
+			.refreshTokenValiditySeconds(3600*24); //demora um dia pra expirar
 	}
 	
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		endpoints
 			.tokenStore(tokenStore())
+			.reuseRefreshTokens(false) //sempre que eu pedir um novo refresh_token será usado
 			.accessTokenConverter(accessTokenConverter())
 			.authenticationManager(authenticationManager);
 	}
