@@ -5,19 +5,19 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("money")
 public class MoneyAPIProperty {
 	
-	private String origemPermitidaString = "http://localhost:8000";
+	private String origemPermitida = "http://localhost:8000";
 	private final Seguranca seguranca = new Seguranca();
 
 	public Seguranca getSeguranca() {
 		return seguranca;
 	}
 
-	public String getOrigemPermitidaString() {
-		return origemPermitidaString;
+	public String getOrigemPermitida() {
+		return origemPermitida;
 	}
 
-	public void setOrigemPermitidaString(String origemPermitidaString) {
-		this.origemPermitidaString = origemPermitidaString;
+	public void setOrigemPermitida(String origemPermitida) {
+		this.origemPermitida = origemPermitida;
 	}
 
 	public static class Seguranca{
