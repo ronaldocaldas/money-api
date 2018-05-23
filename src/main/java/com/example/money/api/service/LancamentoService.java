@@ -1,5 +1,6 @@
 package com.example.money.api.service;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,4 +28,32 @@ public class LancamentoService {
 		return lancamentoRepository.save(lancamento);
 	}
 
+	public Lancamento atualizar(Long codigo, Lancamento lancamento) {
+		Lancamento lancamentoSalvo = buscaLancamentoExistente(codigo);
+		
+		if(!lancamentoSalvo.getPessoa().equals(lancamento.getPessoa())) {
+			validarPessoa(lancamento);
+		}
+		BeanUtils.copyProperties(lancamento, lancamentoSalvo, "codigo"); 
+		return lancamentoRepository.save(lancamentoSalvo);
+	}
+
+	private void validarPessoa(Lancamento lancamento) {
+		Pessoa pessoa = null;
+		if (lancamento.getPessoa().getCodigo() != null) {
+			pessoa = pessoaRepository.findOne(lancamento.getPessoa().getCodigo());
+		}
+
+		if (pessoa == null || pessoa.isInativo()) {
+			throw new PessoaInexistenteOuInativaException();
+		}
+	}
+
+	private Lancamento buscaLancamentoExistente(Long codigo) {
+		Lancamento  lancamento =  lancamentoRepository.findOne(codigo); 
+		if(lancamento == null) {
+			throw new IllegalArgumentException();
+		}
+		return lancamento;
+	}
 }
