@@ -35,7 +35,7 @@ public class AutorizationServerConfig extends AuthorizationServerConfigurerAdapt
 			.scopes("read", "write")
 			.authorizedGrantTypes("password", "refresh_token")
 			.accessTokenValiditySeconds(10)
-			.refreshTokenValiditySeconds(20) //demora um dia pra expirar
+			.refreshTokenValiditySeconds(600) //demora um dia pra expirar
 			.and()
 			.withClient("mobile")
 			.secret("m0b1l30")
